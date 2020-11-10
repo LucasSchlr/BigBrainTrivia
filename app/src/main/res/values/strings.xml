@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BigBrainTrivia</string>
+
+    <string name="login">Login</string>
+    <string name="score">Pontuação: %d</string>
+    <string name="rank">Posição</string>
+    <string name="player_name">Jogador</string>
+    <string name="pontuation">Pontuação</string>
+    <string name="new_game">Novo jogo</string>
 </resources>
