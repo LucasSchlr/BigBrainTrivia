@@ -1,17 +1,24 @@
 package com.example.bigbraintrivia.data
 
-import java.sql.Connection
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
 
-class DatabaseExecutor{
-    private var connection: Connection = MySQLConnector.connection
+
+object DatabaseExecutor {
+    private const val path = "http://10.0.2.2/bigbraintrivia/database.php"
+    private val client = OkHttpClient()
 
     fun executeQuery(query: String) {
-        var result = connection.createStatement().executeQuery(query)
+        val request: Request = Request.Builder()
+            .url(path)
+            .post(query.toRequestBody())
+            .build()
 
-        while (result.next()) {
-            var id = result.getInt(("id"))
-
-            println(id.toString() + ") " + result.getString(("username")) + ":" + result.getString(("password")))
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) throw IOException("Unexpected code $response")
+            println(response.body!!.string())
         }
     }
 }

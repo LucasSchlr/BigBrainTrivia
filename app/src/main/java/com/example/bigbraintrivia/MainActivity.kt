@@ -19,11 +19,8 @@ class MainActivity : AppCompatActivity() {
         regularButton.setOnClickListener{
 
             uiScope.launch {
-                val db = DatabaseExecutor()
-
-                db.executeQuery("SELECT * FROM USERS")
+                DatabaseExecutor.executeQuery("SELECT * FROM USERS")
             }
-            //LeaderBoardActivity.open(this)
         }
     }
 }
