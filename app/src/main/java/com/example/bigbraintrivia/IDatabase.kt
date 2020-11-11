@@ -6,15 +6,15 @@ import com.example.bigbraintrivia.model.Question
 import com.example.bigbraintrivia.model.QuestionOption
 
 interface IDatabase {
-    fun userExists(): Boolean
-    fun isLoginValid(): Boolean
+    fun userExists(userName: String): Boolean
+    fun isLoginValid(userName: String, userPassword: String): Boolean
 
-    fun getPlayer(): Player
-    fun registerPlayer()
+    fun getPlayer(userName: String): Player
+    fun registerPlayer(userName: String, userPassword: String)
 
     fun getQuestions(): List<Question>
     fun getAnswers(): List<QuestionOption>
 
     fun getLeaderboard(): LeaderBoard
-    fun insertLeaderboardEntry()
+    fun insertLeaderboardEntry(userName: String, score: Double)
 }
