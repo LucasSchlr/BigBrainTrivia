@@ -1,12 +1,14 @@
 package com.example.bigbraintrivia.data
 
 import com.example.bigbraintrivia.IDatabase
-import com.example.bigbraintrivia.model.LeaderBoard
-import com.example.bigbraintrivia.model.Player
-import com.example.bigbraintrivia.model.Question
-import com.example.bigbraintrivia.model.QuestionOption
+import com.example.bigbraintrivia.model.*
+import com.google.gson.Gson
+
 
 class DatabaseImpl : IDatabase {
+    private val databaseExecutor = DatabaseExecutor
+    private val gson = Gson()
+
     override fun userExists(userName: String): Boolean {
         TODO("Not yet implemented")
     }
@@ -23,8 +25,14 @@ class DatabaseImpl : IDatabase {
         TODO("Not yet implemented")
     }
 
-    override fun getQuestions(): List<Question> {
-        TODO("Not yet implemented")
+    override fun getQuestions(): List<OnlyQuestion> {
+        val query = String.format("SELECT * FROM questions")
+        val questionJson = databaseExecutor.executeQuery(query)
+
+        return gson.fromJson(
+            questionJson,
+            Array<OnlyQuestion>::class.java
+        ).asList()
     }
 
     override fun getAnswers(): List<QuestionOption> {
