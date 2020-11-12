@@ -25,13 +25,13 @@ class DatabaseImpl : IDatabase {
         TODO("Not yet implemented")
     }
 
-    override fun getQuestions(): List<OnlyQuestion> {
+    override fun getQuestions(): List<Question> {
         val query = String.format("SELECT * FROM questions")
         val questionJson = databaseExecutor.executeQuery(query)
 
         return gson.fromJson(
             questionJson,
-            Array<OnlyQuestion>::class.java
+            Array<Question>::class.java
         ).asList()
     }
 
