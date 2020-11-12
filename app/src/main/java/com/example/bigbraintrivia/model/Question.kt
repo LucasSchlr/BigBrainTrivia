@@ -9,7 +9,7 @@ class Question(
     @SerializedName("question_text")
     val title:String,
 
-    val options:List<QuestionOption>
+    var options:List<QuestionOption>
 ) {
     override fun toString(): String {
         return "Question(id=$id, title='$title', options=$options)"

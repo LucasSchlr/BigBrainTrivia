@@ -29,14 +29,37 @@ class DatabaseImpl : IDatabase {
         val query = String.format("SELECT * FROM questions")
         val questionJson = databaseExecutor.executeQuery(query)
 
-        return gson.fromJson(
+        val questions = gson.fromJson(
             questionJson,
             Array<Question>::class.java
         ).asList()
+
+        val answers = getAnswers()
+
+        questions.forEach { question ->
+            var answerGroup = mutableListOf<QuestionOption>()
+
+            answers.forEach { answer ->
+                if (question.id == answer.questionId) {
+                    answerGroup.add(answer)
+                }
+            }
+
+            question.options = answerGroup.toList()
+        }
+
+        return questions
     }
 
     override fun getAnswers(): List<QuestionOption> {
-        TODO("Not yet implemented")
+        val query = String.format("SELECT * FROM answers")
+        val answersJson = databaseExecutor.executeQuery(query)
+            .replace("\"answer_is_correct\":\"1\"", "\"answer_is_correct\":true")
+
+        return gson.fromJson(
+            answersJson,
+            Array<QuestionOption>::class.java
+        ).asList()
     }
 
     override fun getLeaderboard(): LeaderBoard {
