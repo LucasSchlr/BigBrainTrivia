@@ -75,7 +75,7 @@ class DatabaseImpl : IDatabase {
         return questions
     }
 
-    override fun getAnswers(): List<QuestionOption> {
+    private fun getAnswers(): List<QuestionOption> {
         val query = String.format("SELECT * FROM answers")
         val answersJson = databaseExecutor.executeQuery(query)
             .replace("\"answer_is_correct\":\"1\"", "\"answer_is_correct\":true")

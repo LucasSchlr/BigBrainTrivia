@@ -10,7 +10,6 @@ interface IDatabase {
     fun registerPlayer(userName: String, userPassword: String)
 
     fun getQuestions(): List<Question>
-    fun getAnswers(): List<QuestionOption>
 
     fun getLeaderboard(): List<LeaderBoard>
     fun insertLeaderboardEntry(userName: String, score: Double)
