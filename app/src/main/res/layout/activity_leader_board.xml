@@ -4,48 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud_color"
     tools:context=".leaderboard.LeaderBoardActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtLeaderBoard"
+        android:text="@string/leaderboard"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="30dp"
+        android:textColor="@color/purple_500"
+        android:background="@drawable/white_rounded_corners"
+        app:layout_constraintBottom_toTopOf="@id/listLeaderBoard"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/layoutTitle">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/rank"
-            android:gravity="center"
-            android:id="@+id/txtPosition"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/player_name"
-            android:id="@+id/txtName"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="@string/pontuation"
-            android:id="@+id/txtScore"/>
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/listLeaderBoard"
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutTitle"
-        app:layout_constraintBottom_toTopOf="@id/btNewGame"/>
+        app:layout_constraintTop_toBottomOf="@id/txtLeaderBoard"
+        app:layout_constraintBottom_toTopOf="@id/btNewGame"
+        android:divider="@null"
+        />
     
     <Button
         android:layout_width="match_parent"

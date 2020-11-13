@@ -16,11 +16,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        LeaderBoardActivity.open(this)
         regularButton.setOnClickListener{
 
-            uiScope.launch {
-                DatabaseExecutor.executeQuery("SELECT * FROM USERS")
-            }
+            LeaderBoardActivity.open(this)
         }
     }
 }

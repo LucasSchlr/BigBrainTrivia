@@ -7,4 +7,5 @@
     <string name="player_name">Jogador</string>
     <string name="pontuation">Pontuação</string>
     <string name="new_game">Novo jogo</string>
+    <string name="leaderboard">Ranking</string>
 </resources>
