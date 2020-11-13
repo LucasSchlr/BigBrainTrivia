@@ -12,6 +12,6 @@ interface IDatabase {
     fun getQuestions(): List<Question>
     fun getAnswers(): List<QuestionOption>
 
-    fun getLeaderboard(): LeaderBoard
+    fun getLeaderboard(): List<LeaderBoard>
     fun insertLeaderboardEntry(userName: String, score: Double)
 }

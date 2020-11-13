@@ -10,19 +10,43 @@ class DatabaseImpl : IDatabase {
     private val gson = Gson()
 
     override fun userExists(userName: String): Boolean {
-        TODO("Not yet implemented")
+        val query = String.format("select users.name from users where name = '%s'", userName)
+        val playerJson = databaseExecutor.executeQuery(query)
+
+        val player = gson.fromJson(
+            playerJson,
+            Array<Player>::class.java
+        )[0]
+
+        return player.nome.isNotEmpty()
     }
 
     override fun isLoginValid(userName: String, userPassword: String): Boolean {
-        TODO("Not yet implemented")
+        val query = String.format("select name from users where name = '%s' and password = '%s'", userName, userPassword)
+        val playerJson = databaseExecutor.executeQuery(query)
+
+        val player = gson.fromJson(
+            playerJson,
+            Array<Player>::class.java
+        )[0]
+
+        return player.nome.isNotEmpty()
     }
 
     override fun getPlayer(userName: String): Player {
-        TODO("Not yet implemented")
+        val query = String.format("select * from users where name = '%s'", userName)
+        val playerJson = databaseExecutor.executeQuery(query)
+
+        return gson.fromJson(
+            playerJson,
+            Array<Player>::class.java
+        )[0]
     }
 
     override fun registerPlayer(userName: String, userPassword: String) {
-        TODO("Not yet implemented")
+        val query = String.format("insert into users (NAME, PASSWORD) VALUES ('%s', '%s')", userName, userPassword)
+        databaseExecutor.executeQuery(query)
+
     }
 
     override fun getQuestions(): List<Question> {
@@ -62,12 +86,26 @@ class DatabaseImpl : IDatabase {
         ).asList()
     }
 
-    override fun getLeaderboard(): LeaderBoard {
-        TODO("Not yet implemented")
+    override fun getLeaderboard(): List<LeaderBoard> {
+        val query = String.format("select * from leaderboard order by score desc limit 10")
+        val leaderBoardJson = databaseExecutor.executeQuery(query)
+
+        var leaderBoard = gson.fromJson(
+            leaderBoardJson,
+            Array<LeaderBoard>::class.java
+        ).asList()
+
+        var counter = 0
+        leaderBoard.forEach{ leaderBoard ->
+            leaderBoard.position = counter++
+        }
+
+        return leaderBoard
     }
 
     override fun insertLeaderboardEntry(userName: String, score: Double) {
-        TODO("Not yet implemented")
+        val query = String.format("insert into leaderboard (NAME, SCORE) VALUES ('%s', '%s')", userName, score.toString())
+        databaseExecutor.executeQuery(query)
     }
 
 }
