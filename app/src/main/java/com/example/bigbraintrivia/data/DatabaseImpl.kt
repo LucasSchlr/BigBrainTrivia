@@ -28,9 +28,13 @@ class DatabaseImpl : IDatabase {
         val player = gson.fromJson(
             playerJson,
             Array<Player>::class.java
-        )[0]
+        )
 
-        return player.nome.isNotEmpty()
+        if (player.isNotEmpty()) {
+            return player[0].nome.isNotEmpty()
+        }
+
+        return false
     }
 
     override fun getPlayer(userName: String): Player {
