@@ -24,4 +24,4 @@ String.format("insert into leaderboard (NAME, SCORE) VALUES ('%s', %2d)", userna
 
 /* get leaderboard top 10 */
 select * from leaderboard order by score desc limit 10
-String.format("select * from leaderboard order by score desc limit 10);
+String.format("select * from leaderboard order by score desc limit 10");
