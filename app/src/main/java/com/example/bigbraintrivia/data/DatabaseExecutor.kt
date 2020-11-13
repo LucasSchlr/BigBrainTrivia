@@ -7,7 +7,7 @@ import org.apache.commons.text.StringEscapeUtils
 import java.io.IOException
 
 object DatabaseExecutor {
-    private const val path = "http://localhost/bigbraintrivia/database.php"
+    private const val path = "http://10.0.2.2/bigbraintrivia/database.php"
     private val client = OkHttpClient()
 
     fun executeQuery(query: String): String {
