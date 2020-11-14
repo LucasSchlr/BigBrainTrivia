@@ -28,6 +28,11 @@ class LeaderBoardActivity : AppCompatActivity() {
         btNewGame.setOnClickListener { QuestionActivity.open(this) }
     }
 
+    override fun onResume() {
+        viewModel.loadLeaderBoard()
+        super.onResume()
+    }
+
     companion object {
         fun open (activity: Activity){
             activity.startActivity(

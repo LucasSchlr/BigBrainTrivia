@@ -25,13 +25,18 @@ class QuestionActivity : AppCompatActivity() {
             txtScore.text = getString(R.string.score, score)
         })
 
+        viewModel.inGame.observe(this, Observer { inGame ->
+            if (!inGame) {
+                finish()
+            }
+        })
+
         listOptions.setOnItemClickListener { _, _, position, _ ->
             viewModel.checkAnswer(position)
-
         }
 
+
         viewModel.loadQuestions()
-        viewModel.startGame()
     }
 
     fun setupQuestion(question: Question){

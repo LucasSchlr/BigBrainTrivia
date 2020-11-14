@@ -1,5 +1,6 @@
 package com.example.bigbraintrivia.data
 
+import android.util.Log
 import com.example.bigbraintrivia.IDatabase
 import com.example.bigbraintrivia.model.*
 import com.google.gson.Gson
@@ -54,27 +55,36 @@ class DatabaseImpl : IDatabase {
     }
 
     override fun getQuestions(): List<Question> {
+        Log.i("teste", "entrando aqui")
         val query = String.format("SELECT * FROM questions")
+        Log.i("teste", "entrando aqui.2")
         val questionJson = databaseExecutor.executeQuery(query)
+        Log.i("teste", "0")
 
         val questions = gson.fromJson(
             questionJson,
             Array<Question>::class.java
         ).asList()
+        Log.i("teste", "1")
 
         val answers = getAnswers()
+        Log.i("teste", "2")
 
         questions.forEach { question ->
+            Log.i("teste", "3")
             var answerGroup = mutableListOf<QuestionOption>()
+            Log.i("teste", "4")
 
             answers.forEach { answer ->
                 if (question.id == answer.questionId) {
                     answerGroup.add(answer)
                 }
             }
-
+            Log.i("teste", "5")
             question.options = answerGroup.toList()
+            Log.i("teste", "6")
         }
+        Log.i("teste", "7")
 
         return questions
     }
@@ -99,7 +109,7 @@ class DatabaseImpl : IDatabase {
             Array<LeaderBoard>::class.java
         ).asList()
 
-        var counter = 0
+        var counter = 1
         leaderBoard.forEach{ leaderBoard ->
             leaderBoard.position = counter++
         }
