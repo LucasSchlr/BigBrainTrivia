@@ -2,6 +2,7 @@ package com.example.bigbraintrivia.question
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bigbraintrivia.BigBrainTrivia
 import com.example.bigbraintrivia.IDatabase
 import com.example.bigbraintrivia.data.DatabaseImpl
 import com.example.bigbraintrivia.model.Question
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 class QuestionViewModel(): ViewModel() {
     val questionsList = MutableLiveData<List<Question>>()
     val currentQuestion = MutableLiveData<Question>()
+    var usuario = ""
     var currentQuestionIndex = -1;
     var score = MutableLiveData<Int>()
     var inGame = MutableLiveData<Boolean>().apply {
@@ -32,7 +34,7 @@ class QuestionViewModel(): ViewModel() {
             currentQuestion.value = questionsList.value?.get(currentQuestionIndex)
         }else{
             uiScope.launch {
-                database.insertLeaderboardEntry("luquinhas", score.value!!.toDouble())
+                database.insertLeaderboardEntry(usuario, score.value!!.toDouble())
                 CoroutineScope(Dispatchers.Main).launch{inGame.value = false}
             }
         }

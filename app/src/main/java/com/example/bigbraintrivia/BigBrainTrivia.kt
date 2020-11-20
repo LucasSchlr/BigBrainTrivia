@@ -6,6 +6,8 @@ import org.koin.android.ext.android.startKoin
 import org.koin.standalone.StandAloneContext
 
 class BigBrainTrivia : Application(){
+
+    var usuario = ""
     override fun onCreate() {
         super.onCreate()
         startKoin(this, listOf(androidModule))

@@ -18,7 +18,6 @@ class LeaderBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leader_board)
 
-        //todo revisar string resource pontuation
         viewModel.listLeaderBoard.observe(this, Observer { list ->
             listLeaderBoard.adapter = LeaderBoardAdapter(this, list)
         })

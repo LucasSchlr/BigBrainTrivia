@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import com.example.bigbraintrivia.BigBrainTrivia
 import com.example.bigbraintrivia.R
 import com.example.bigbraintrivia.model.Question
 import kotlinx.android.synthetic.main.activity_question_activity.*
@@ -34,8 +35,7 @@ class QuestionActivity : AppCompatActivity() {
         listOptions.setOnItemClickListener { _, _, position, _ ->
             viewModel.checkAnswer(position)
         }
-
-
+        viewModel.usuario = (getApplication() as BigBrainTrivia).usuario
         viewModel.loadQuestions()
     }
 
